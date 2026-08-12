@@ -63,6 +63,15 @@ jobs:
 
           echo "${{ secrets.PRIVATE_KEY }}" > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
+      - name: Copy index.html to server
+        run: |
+          scp -o StrictHostKeyChecking=no \
+            -i ~/.ssh/id_ed25519 \
+            index.html \
+            "ec2-user@${{ env.EC2_HOST }}:/tmp/index.html"    
+
+
+
       - name: Install and start Nginx SSH
         run: |
           ssh -o StrictHostKeyChecking=no \
@@ -70,6 +79,8 @@ jobs:
             "ec2-user@${{ env.EC2_HOST }}" \
             "sudo dnf update -y && \
              sudo dnf install -y nginx && \
+             sudo mv /tmp/index.html /usr/share/nginx/html/index.html && \
+             
              sudo systemctl enable nginx && \
              sudo systemctl start nginx"  
 
