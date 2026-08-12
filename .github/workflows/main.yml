@@ -31,7 +31,7 @@ jobs:
             --instance-type t3.micro \
             --key-name github-key \
             --security-group-ids sg-0d67bd2d0a09d9dfc \
-            --subnet-id subnet-subnet-01a0c72ddd872c2b9 \
+            --subnet-id subnet-01a0c72ddd872c2b9 \
             --user-data file://userdata.sh \
             --region ap-south-1
 
