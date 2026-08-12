@@ -72,7 +72,7 @@ jobs:
           sudo dnf install -y nginx
           sudo systemctl enable nginx
           sudo systemctl start nginx
-          EOF    
+          EOF   
 
 
       - name: Copy files to EC2
