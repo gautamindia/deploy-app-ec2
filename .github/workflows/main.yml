@@ -1,0 +1,38 @@
+name: Basic Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-south-1
+
+      - name: Check AWS CLI
+        run: aws --version
+
+      - name: Launch EC2
+        run: |
+          aws ec2 run-instances \
+            --image-id ami-035827357e3c7e810 \
+            --instance-type t3.micro \
+            --key-name github-key \
+            --security-group-ids sg-0d67bd2d0a09d9dfc \
+            --subnet-id subnet-subnet-01a0c72ddd872c2b9 \
+            --user-data file://userdata.sh \
+            --region ap-south-1
+
+      
