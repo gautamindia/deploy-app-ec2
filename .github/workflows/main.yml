@@ -66,12 +66,12 @@ jobs:
       - name: Install and start Nginx SSH
         run: |
           ssh -o StrictHostKeyChecking=no \
-           -i ~/.ssh/id_ed25519 \
-           "ec2-user@${{ env.EC2_HOST }}" << 'EOF'
-           sudo dnf update -y
-           sudo dnf install -y nginx
-           sudo systemctl enable nginx
-           sudo systemctl start nginx
+            -i ~/.ssh/id_ed25519 \
+            "ec2-user@${{ env.EC2_HOST }}" << 'EOF'
+          sudo dnf update -y
+          sudo dnf install -y nginx
+          sudo systemctl enable nginx
+          sudo systemctl start nginx
           EOF    
 
 
