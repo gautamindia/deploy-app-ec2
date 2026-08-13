@@ -85,11 +85,5 @@ jobs:
              sudo systemctl start nginx"  
 
 
-      - name: Copy files to EC2
-        run: |
-          scp -o StrictHostKeyChecking=no \
-              -i ~/.ssh/id_ed25519 \
-              index.html \
-              "ec2-user@${{ env.EC2_HOST }}:/usr/share/nginx/html/index.html"
 
      
